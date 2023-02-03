@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM python:3.9-alpine
 LABEL maintainer="Daniel Stöhr"
 
 ENV PYTHONUNBUFFERED 1
@@ -22,12 +22,11 @@ RUN python -m venv /py && \
     then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
-    apk del .tmp-build-deps && \
-    adduser \
-    --disabled-password \
-    # VSCODE DEV-CONTAINER runs in error when acivated
-    # --no-create-home \ 
-    django-user
+    apk del .tmp-build-deps
+RUN adduser --disabled-password django-user
+# VSCODE DEV-CONTAINER runs in error when acivated
+# --no-create-home \ 
+
 
 ENV PATH="/py/bin:$PATH"
 
