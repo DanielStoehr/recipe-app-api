@@ -22,8 +22,8 @@ RUN python -m venv /py && \
     then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
-    apk del .tmp-build-deps
-RUN adduser --disabled-password django-user
+    apk del .tmp-build-deps && \
+    adduser --disabled-password django-user
 # VSCODE DEV-CONTAINER runs in error when acivated
 # --no-create-home \ 
 
