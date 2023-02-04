@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "core",
     "rest_framework",
     "drf_spectacular",
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "core.User"
 
 REST_FRAMEWORK = {"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"}
+
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
