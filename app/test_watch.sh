@@ -1,0 +1,1 @@
+pytest -f --color=yes --disable-warnings
