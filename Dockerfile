@@ -14,9 +14,9 @@ ARG DEV=false
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     # Install Dependencies for Postgres
-    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache postgresql-client jpeg-dev && \
     apk add --update --no-cache --virtual .tmp-build-deps \
-    build-base postgresql-dev musl-dev && \
+    build-base postgresql-dev musl-dev zlib zlib-dev && \
     # Install Python-Requirements
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
@@ -24,9 +24,13 @@ RUN python -m venv /py && \
     fi && \
     rm -rf /tmp && \
     apk del .tmp-build-deps && \
-    adduser --disabled-password django-user
-# VSCODE DEV-CONTAINER runs in error when acivated
-# --no-create-home \ 
+    # VSCODE DEV-CONTAINER runs in error when acivated: --no-create-home
+    adduser --disabled-password django-user  && \
+    # Setup directory for media/static files
+    mkdir -p /vol/web/media && \
+    mkdir -p /vol/web/static && \
+    chown -R django-user:django-user /vol && \
+    chmod -R 755 /vol
 
 
 ENV PATH="/py/bin:$PATH"

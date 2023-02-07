@@ -1,1 +1,1 @@
-pytest -f --color=yes --disable-warnings --no-header
+pytest -ff -n auto --color=yes --disable-warnings --no-header
